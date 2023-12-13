@@ -109,7 +109,8 @@ Consideration of these aspects will provide a clearer perspective on the model's
 <iframe src="confusion_matrix.html" width=800 height=600 frameBorder=0></iframe>
 
 
-- **F**
+- **Precisioin:** 0.8741150264196992
+- **Accuracy:** 0.9009433962264151
 
 
 
