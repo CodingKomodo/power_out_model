@@ -44,45 +44,47 @@ For predicting outage durations, a regression model is appropriate as it deals w
 Note: Make sure to justify what information you would know at the “time of prediction” and to only train your model using those features. For instance, if we wanted to predict your final exam grade, we couldn’t use your Project 5 grade, because Project 5 is only due after the final exam!
 
 
+### Model Description:
 
-## Base Model Description
-
-**Type of Model:** Linear Regression
-
-### Features in the Model
-
-The selected features used in the model are:
-- `DEMAND.LOSS.MW`: Quantitative feature representing the amount of demand loss in megawatts.
-- `CUSTOMERS.AFFECTED`: Quantitative feature indicating the number of customers affected by the outage.
-- `RES.PRICE`, `COM.PRICE`, `IND.PRICE`: Quanatative features representing residential, commercial, and industrial electricity prices.
-
-**Quantitative Features:** `DEMAND.LOSS.MW`, `CUSTOMERS.AFFECTED`, `RES.PRICE`, `COM.PRICE`, `IND.PRICE`
-**Nominal Features:** `POSTAL.CODE`
-
-**Ordinal Features:** NONE
-
-### Data Preprocessing
-
-1. **Handling Missing Values:** We dropped all the missing columns
-### Model Performance
-
-Our R^2 was around 0.23 while our RMSE was 
-<!-- The performance of the model is evaluated using Mean Squared Error (MSE) as a metric. However, the code provided doesn't calculate or report the performance metrics like MSE. To evaluate the model's performance, it's necessary to compute metrics like MSE on the test set (`y_test` and `y_pred`). -->
-
-### Model Evaluation
-
-<!-- To assess the model's "goodness," we need to compare its performance metrics (such as MSE) against a baseline or other models. A "good" model should demonstrate lower MSE, indicating better accuracy in predicting outage durations. -->
-
-### Improvements and Considerations
-
-1. **Feature Engineering:** Consider incorporating more features that might influence outage durations, such as weather conditions, time of day/year, historical outage data, or geographical factors.
+1. **Type of Model:** RandomForestClassifier - This model is an ensemble learning method that constructs multiple decision trees during training and outputs the mode of the classes (classification) or the mean prediction (regression) of the individual trees.
   
-2. **Feature Encoding:** Nominal features like `RES.PRICE`, `COM.PRICE`, `IND.PRICE` might benefit from proper encoding techniques like one-hot encoding to translate them into numerical form before training the model.
+2. **Features in the Model:**
 
-3. **Model Selection:** Experiment with other regression models (e.g., Decision Trees, Random Forests, Gradient Boosting) and evaluate their performance against the Linear Regression model.
+   a. **Quantitative Features:**
+      - `N/A`
+   
+   b. **Ordinal Features:**
+      - `ANOMALY.LEVEL`
+      - `MONTH`
+   
+   c. **Nominal Features:**
+      - `POSTAL.CODE`
 
-4. **Hyperparameter Tuning:** Perform grid search or other hyperparameter tuning techniques to optimize the model's performance.
+  
+### Encoding and Feature Transformation:
 
-Without performance metrics reported, it's challenging to definitively assess the model's "goodness." However, further improvements and evaluations as suggested can enhance the model's predictive power for outage durations.
+1. **Encoding:**
+   - One-Hot Encoding was applied to the 'POSTAL.CODE' feature using `OneHotEncoder(handle_unknown='ignore')` within a `ColumnTransformer` to convert categorical data into a format suitable for machine learning models.
 
+2. **Feature Transformation:**
+   - No explicit feature transformation or scaling was applied to the other features, indicating they might have been considered in their original form during the modeling process.
+
+### Performance Evaluation:
+
+- **Interpretation of Performance:**
+  - By using `y_test` and `prediction` obtained from `pl.predict(X_test)`, we were able to find an accuracy score of around 0.63.
+  - Compare this accuracy score against the baseline or other models (if available).
+  - Consider domain-specific implications and the cost of misclassification.
+  
+- **Considerations for Model Improvement:**
+  - Experiment with different models (e.g., Gradient Boosting, Logistic Regression, etc.).
+  - Tune hyperparameters using techniques like GridSearchCV to improve model performance.
+  - Feature engineering: Extract more informative features or transform existing ones.
+  
+- **Domain Knowledge:**
+  - Domain experts' input could be valuable in refining the model or feature selection.
+
+Without the specific accuracy score or additional metrics, it's challenging to definitively categorize the model as "good." An "accurate" model highly depends on the problem's context, the data quality, feature selection, and domain understanding.
+
+Consideration of these aspects will provide a clearer perspective on the model's effectiveness and guide improvements to achieve a better-performing model.
 
