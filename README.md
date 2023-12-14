@@ -1,4 +1,3 @@
-# power_out_model
 
 
 ### Prediction Problem and Type:
