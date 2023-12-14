@@ -1,5 +1,4 @@
-
-
+___
 ### Prediction Problem and Type:
 
 The prediction problem is **multiclass classification**. We are predicting the `CAUSE.CATEGORY` variable, which represents the categorized cause of an outage event. This variable aims to classify the cause category (e.g., equipment failure, human error, etc.) based on given features.
