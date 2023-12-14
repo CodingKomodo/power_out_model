@@ -1,5 +1,5 @@
 remote_theme: pages-themes/cayman@v0.2.0
-plugins:gi
+plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 title: Predicting the Cause of Power Outages
 description: Made by Ethan Cao and Bill Wang
