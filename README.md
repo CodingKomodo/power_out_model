@@ -1,5 +1,5 @@
 ___
-### Prediction Problem and Type:
+## Prediction Problem and Type:
 
 The prediction problem is **multiclass classification**. We are predicting the `CAUSE.CATEGORY` variable, which represents the categorized cause of an outage event. This variable aims to classify the cause category (e.g., equipment failure, human error, etc.) based on given features.
 
@@ -22,17 +22,16 @@ The chosen evaluation metric is **accuracy_score** for assessing model performan
 The objective here is to predict the cause category of outages based on the provided features using a multiclass classification approach, and the chosen metrics align with the nature of this predictive problem, considering the known features at the time of prediction and the significance of correctly identifying the cause categories for mitigation and resolution of outages.
 
 
-### Base Model:
+## Base Model:
 
 1. **Type of Model:** RandomForestClassifier - This model is an ensemble learning method that constructs multiple decision trees during training and outputs the mode of the classes (classification) or the mean prediction (regression) of the individual trees.
   
 2. **Features in the Model:**
 
    a. **Quantitative Features:**
-      - `N/A`
+      - `ANOMALY.LEVEL`
    
    b. **Ordinal Features:**
-      - `ANOMALY.LEVEL`
       - `MONTH`
    
    c. **Nominal Features:**
@@ -50,7 +49,7 @@ The objective here is to predict the cause category of outages based on the prov
 ### Performance Evaluation:
 
 - **Interpretation of Performance:**
-  - By using `y_test` and `prediction` obtained from `pl.predict(X_test)`, we were able to find an accuracy score of around 0.63.
+  - By using `y_test` and `prediction` obtained from `pl.predict(X_test)`, we were able to find an accuracy score of around 0.707.
   - The accuracy score for a simple model, where we predict the greatest amount of one of cateogry which is `severe weather`, we would get an accuracy score of around 53%.
   - Considering the accuracy score for a simple model, an accuracy score of 63% is a decent starting point and predicts better than a simple model
   
@@ -60,12 +59,7 @@ The objective here is to predict the cause category of outages based on the prov
   - Feature engineering: Extract more informative features or transform existing ones.
   
 
-Without the specific accuracy score or additional metrics, it's challenging to definitively categorize the model as "good." An "accurate" model highly depends on the problem's context, the data quality, feature selection, and domain understanding.
-
-Consideration of these aspects will provide a clearer perspective on the model's effectiveness and guide improvements to achieve a better-performing model.
-
-
-### Features Added and Their Relevance:
+## Final Model: Features Added and Their Relevance:
 
 1. **'MONTH' Feature:** 
    - **Rationale:** The 'MONTH' feature might capture seasonal variations or trends in outage occurrences. Certain months might have higher or lower outage frequencies due to weather patterns, maintenance schedules, or increased usage, providing valuable predictive patterns.
@@ -86,12 +80,16 @@ Consideration of these aspects will provide a clearer perspective on the model's
 ### Model Performance Improvement over Baseline:
 
 - **Baseline Model:** 
-  - Features: 'POSTAL.CODE', 'ANOMALY.LEVEL', 'OUTAGE.DURATION'
-  - Accuracy: Not specified
+  - Features: 'POSTAL.CODE', 'ANOMALY.LEVEL', 'OUTAGE.DURATION', 'OUTAGE.START.DATETIME'
+  - Accuracy: 70.7%
 
 - **Final Model:**
   - Added Features: 'MONTH', 'CUSTOMERS.AFFECTED'
   - Hyperparameter Tuning: `max_depth: 22`
+  - Feature Engineering : 
+    - One Hot Encoded the Postal Codes to transform them into usable features for the classifier
+    - Cyclically encoded the Month values of each power outage. 
+    - Extracted the Hour values from the 'OUTAGE.START.DATETIME' then we cyclically encoded the hour values of each power outage
   - Accuracy: 0.896 (89.6%)
 
 ### Improvement Explanation:
@@ -106,8 +104,35 @@ Consideration of these aspects will provide a clearer perspective on the model's
 
 <iframe src="confusion_matrix.html" width=800 height=600 frameBorder=0></iframe> 
 
-- **Precisioin:** 0.8741150264196992
-- **Accuracy:** 0.9009433962264151
+- **Precisioin:** 0.833396271640225
+- **Recall:** 0.8490566037735849
 
+
+<iframe src="accuracy_bar.html" width=800 height=600 frameBorder=0></iframe> 
+
+
+### Assessment of Model Predictions for 'Severe Weather' Instances
+
+Looking at the accuracy bar above, one can see that `Severe Weather` has a very high accuracy compared to the rest of the categories. We want to test if there is a bias towards `Severe Weather`
+
+**Null Hypothesis:** The null hypothesis assumes that there is no difference in the model's accuracy between 'severe weather' predictions and other prediction classes. In simpler terms, it implies that the observed accuracy for 'severe weather' predictions is purely due to chance and does not indicate any real difference.
+
+**Observed Accuracy for 'Severe Weather' Predictions: 97.16%**
+
+The observed accuracy of 97.16% signifies how accurately the model predicts instances categorized as 'severe weather.' This high accuracy suggests that the model performs exceptionally well when identifying and classifying 'severe weather' events.
+
+**Significance Test: p-value of 0.0000**
+
+The obtained p-value of 0.0000 from a statistical test suggests that the observed accuracy difference between 'severe weather' predictions and other predictions is statistically significant. This implies that the model's performance in predicting 'severe weather' differs significantly from its performance in predicting other types of events.
+
+
+<iframe src="permutation.html" width=800 height=600 frameBorder=0></iframe> 
+
+
+**Interpretation**
+
+The statistical significance of the observed accuracy difference indicates a potential bias or distinction in the model's behavior towards 'severe weather' predictions compared to other prediction classes. The reason for this biased behavior is because severe weather is the main cause of most outages, so the data is fit 
+
+It's important to consider these results with caution and delve deeper into understanding the model's behavior, potential biases, and real-world impacts to ensure fair and accurate predictions across all categories.
 
 
