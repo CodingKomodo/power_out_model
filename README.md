@@ -116,30 +116,37 @@ The objective here is to predict the cause category of outages based on the prov
 <iframe src="accuracy_bar.html" width=800 height=600 frameBorder=0></iframe> 
 
 
-### Assessment of Model Predictions for 'Severe Weather' Instances
+### Statistical Analysis on Model Performance in Different Climate Categories
 
-Looking at the accuracy bar above, one can see that `Severe Weather` has a very high accuracy compared to the rest of the categories. We want to test if there is a bias towards `Severe Weather`
+#### Groups Analyzed
 
-**Null Hypothesis:** The null hypothesis assumes that there is no difference in the model's accuracy between 'severe weather' predictions and other prediction classes. In simpler terms, it implies that the observed accuracy for 'severe weather' predictions is purely due to chance and does not indicate any real difference.
+- **Group X:** 'Warm' Climate Category
+- **Group Y:** 'Not Warm' Climate Category
 
-**Alternative Hypothesis:** The alternative hypothesis proposes that the observed accuracy for 'severe weather' predictions is not purely due to chance; instead, it indicates a statistically significant and meaningful difference in the model's accuracy between 'severe weather' predictions and other prediction classes.
+#### Evaluation Metric
 
-**Observed Accuracy for 'Severe Weather' Predictions: 97.5%**
+- **Evaluation Metric Used:** Model Performance (e.g., accuracy, error rate)
 
-The observed accuracy of 97.5% signifies how accurately the model predicts instances categorized as 'severe weather.' This high accuracy suggests that the model performs exceptionally well when identifying and classifying 'severe weather' events.
+#### Hypotheses
 
-**Significance Test: p-value of 0.0000**
+- **Null Hypothesis (H0):** There is no significant difference in the model's performance between 'warm' and 'not warm' climate categories.
+- **Alternative Hypothesis (H1):** There exists a significant difference in the model's performance between 'warm' and 'not warm' climate categories.
 
-The obtained p-value of 0.0000 from a statistical test suggests that the observed accuracy difference between 'severe weather' predictions and other predictions is statistically significant. This implies that the model's performance in predicting 'severe weather' differs significantly from its performance in predicting other types of events.
+#### Test Statistic and Significance Level
 
+- **Test Statistic:** Difference in model performance (e.g., accuracy, error) between 'warm' and 'not warm' climate categories.
+- **Significance Level:** Chosen at α = 0.05 (5%)
 
-<iframe src="permutation.html" width=800 height=600 frameBorder=0></iframe> 
+#### Analysis Details
 
+- **Permutation Test:** Simulated the null hypothesis by shuffling 'CLIMATE.CATEGORY' labels 1,000 times, recalculating model performance differences between 'warm' and 'not warm' climate areas each time.
+- **Resulting p-value:** Obtained p-value = 0.686
 
-**Interpretation**
+#### Conclusion
 
-The statistical significance of the observed accuracy difference indicates a potential bias or distinction in the model's behavior towards 'severe weather' predictions compared to other prediction classes. The reason for this biased behavior is because severe weather is the main cause of most outages, so the data is fit mainly on this type of data. As a result, most of the data that will be predicted to be 'severe weather'.
+- **Interpretation:** With a p-value of 0.686, exceeding the significance level of 0.05, we fail to reject the null hypothesis.
+- **Implication:** The observed difference in model performance between 'warm' and 'not warm' climate categories is not statistically significant at the chosen significance level.
+- **Caution:** This analysis suggests that the observed difference could plausibly occur due to random variability and might not indicate a genuine disparity in the model's performance between these climate categories.
 
-It's important to consider these results with caution and delve deeper into understanding the model's behavior, potential biases, and real-world impacts to ensure fair and accurate predictions across all categories.
 
 
