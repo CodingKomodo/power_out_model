@@ -138,7 +138,7 @@ The obtained p-value of 0.0000 from a statistical test suggests that the observe
 
 **Interpretation**
 
-The statistical significance of the observed accuracy difference indicates a potential bias or distinction in the model's behavior towards 'severe weather' predictions compared to other prediction classes. The reason for this biased behavior is because severe weather is the main cause of most outages, so the data is fit 
+The statistical significance of the observed accuracy difference indicates a potential bias or distinction in the model's behavior towards 'severe weather' predictions compared to other prediction classes. The reason for this biased behavior is because severe weather is the main cause of most outages, so the data is fit mainly on this type of data. As a result, most of the data that will be predicted to be 'severe weather'.
 
 It's important to consider these results with caution and delve deeper into understanding the model's behavior, potential biases, and real-world impacts to ensure fair and accurate predictions across all categories.
 
