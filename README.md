@@ -124,7 +124,7 @@ Looking at the accuracy bar above, one can see that `Severe Weather` has a very 
 
 **Alternative Hypothesis:** The alternative hypothesis proposes that the observed accuracy for 'severe weather' predictions is not purely due to chance; instead, it indicates a statistically significant and meaningful difference in the model's accuracy between 'severe weather' predictions and other prediction classes.
 
-**Observed Accuracy for 'Severe Weather' Predictions: 97.16%**
+**Observed Accuracy for 'Severe Weather' Predictions: 97.5%**
 
 The observed accuracy of 97.5% signifies how accurately the model predicts instances categorized as 'severe weather.' This high accuracy suggests that the model performs exceptionally well when identifying and classifying 'severe weather' events.
 
