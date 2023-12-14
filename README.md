@@ -96,6 +96,10 @@ The objective here is to predict the cause category of outages based on the prov
 
 - **Feature Addition:** The inclusion of 'MONTH' and 'CUSTOMERS.AFFECTED' features enriches the model by providing more diverse information regarding seasonal patterns and the impact of outages on customers. This additional information allows the model to capture nuanced relationships between these features and the cause categories, leading to improved predictive performance.
 
+- **Cyclical Encoding and Feature Engineering:** Initially, the Month feature were simply labeled by numbers from 1-12. However, while this preserves the similarity of similar months like July and August, it makes there be a large jump between December and January. We solved this problem by performing Cyclical Encoding on the Month feature. That is, we encoded the Month feature to both Sin and Cos values in order to make the data circular and cyclical. This preserves the similarity of nearby months without duplicating any values. We performed a similar process on hour values after extracting them from the OUTAGE.START.DATETIME. This let us preserve the similarity of nearby hours such as midnight and 1 am. The Month feature after the cyclical encoding is shown in a graph below. 
+
+<iframe src="sig_graph.html" width=800 height=600 frameBorder=0></iframe> 
+
 - **Hyperparameter Tuning:** The optimization of the `max_depth` hyperparameter via GridSearchCV likely helped the model achieve better generalization by preventing overfitting and improving its ability to capture complex relationships within the data.
 
 - **Performance Comparison:** The accuracy of 89.6% in the final model represents a significant improvement over the baseline model (accuracy not specified). This enhancement suggests that the added features and optimized hyperparameters contributed positively to the model's predictive capabilities, providing a more accurate classification of outage causes.
