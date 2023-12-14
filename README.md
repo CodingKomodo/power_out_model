@@ -1,7 +1,7 @@
 ___
 ## Prediction Problem and Type:
 
-The prediction problem is **multiclass classification**. We are predicting the `CAUSE.CATEGORY` variable, which represents the categorized cause of an outage event. This variable aims to classify the cause category (e.g., equipment failure, human error, etc.) based on given features.
+The prediction problem is **multiclass classification**. We are predicting the `CAUSE.CATEGORY` variable, which represents the categorized cause of an outage event. This variable aims to classify the cause category (e.g., equipment failure, severe weather, etc.) based on given features.
 
 ### Response Variable Justification:
 
@@ -54,7 +54,7 @@ The objective here is to predict the cause category of outages based on the prov
   - Considering the accuracy score for a simple model, an accuracy score of 63% is a decent starting point and predicts better than a simple model
   
 - **Considerations for Model Improvement:**
-  - Adding more features/columns such as `OUTAGE.DURATION`, `MONTH`,`CUSTOMERS.AFFECTED`.
+  - Adding more features/columns such as 'OUTAGE.DURATION', 'MONTH','CUSTOMERS.AFFECTED'.
   - Tune hyperparameters using techniques like GridSearchCV to improve model performance.
   - Feature engineering: Extract more informative features or transform existing ones.
   
@@ -81,13 +81,14 @@ The objective here is to predict the cause category of outages based on the prov
 
 - **Baseline Model:** 
   - Features: 'POSTAL.CODE', 'ANOMALY.LEVEL', 'OUTAGE.DURATION', 'OUTAGE.START.DATETIME'
+  - Feature Engineering: 
+    - One Hot Encoded the Postal Codes to transform them into usable features for the classifier
   - Accuracy: 70.7%
 
 - **Final Model:**
   - Added Features: 'MONTH', 'CUSTOMERS.AFFECTED'
   - Hyperparameter Tuning: `max_depth: 22`
-  - Feature Engineering : 
-    - One Hot Encoded the Postal Codes to transform them into usable features for the classifier
+  - Added Feature Engineering: 
     - Cyclically encoded the Month values of each power outage. 
     - Extracted the Hour values from the 'OUTAGE.START.DATETIME' then we cyclically encoded the hour values of each power outage
   - Accuracy: 0.896 (89.6%)
@@ -102,7 +103,7 @@ The objective here is to predict the cause category of outages based on the prov
 
 - **Hyperparameter Tuning:** The optimization of the `max_depth` hyperparameter via GridSearchCV likely helped the model achieve better generalization by preventing overfitting and improving its ability to capture complex relationships within the data.
 
-- **Performance Comparison:** The accuracy of 89.6% in the final model represents a significant improvement over the baseline model (accuracy not specified). This enhancement suggests that the added features and optimized hyperparameters contributed positively to the model's predictive capabilities, providing a more accurate classification of outage causes.
+- **Performance Comparison:** The accuracy of 89.6% in the final model represents a significant improvement over the baseline model of 7. This enhancement suggests that the added features and optimized hyperparameters contributed positively to the model's predictive capabilities, providing a more accurate classification of outage causes.
 
 ### Fairness Analysis
 
@@ -120,6 +121,8 @@ The objective here is to predict the cause category of outages based on the prov
 Looking at the accuracy bar above, one can see that `Severe Weather` has a very high accuracy compared to the rest of the categories. We want to test if there is a bias towards `Severe Weather`
 
 **Null Hypothesis:** The null hypothesis assumes that there is no difference in the model's accuracy between 'severe weather' predictions and other prediction classes. In simpler terms, it implies that the observed accuracy for 'severe weather' predictions is purely due to chance and does not indicate any real difference.
+
+**Alternative Hypothesis:** The alternative hypothesis proposes that the observed accuracy for 'severe weather' predictions is not purely due to chance; instead, it indicates a statistically significant and meaningful difference in the model's accuracy between 'severe weather' predictions and other prediction classes.
 
 **Observed Accuracy for 'Severe Weather' Predictions: 97.16%**
 
