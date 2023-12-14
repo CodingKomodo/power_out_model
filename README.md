@@ -126,7 +126,7 @@ Looking at the accuracy bar above, one can see that `Severe Weather` has a very 
 
 **Observed Accuracy for 'Severe Weather' Predictions: 97.16%**
 
-The observed accuracy of 97.16% signifies how accurately the model predicts instances categorized as 'severe weather.' This high accuracy suggests that the model performs exceptionally well when identifying and classifying 'severe weather' events.
+The observed accuracy of 97.5% signifies how accurately the model predicts instances categorized as 'severe weather.' This high accuracy suggests that the model performs exceptionally well when identifying and classifying 'severe weather' events.
 
 **Significance Test: p-value of 0.0000**
 
