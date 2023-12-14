@@ -106,8 +106,35 @@ Consideration of these aspects will provide a clearer perspective on the model's
 
 <iframe src="confusion_matrix.html" width=800 height=600 frameBorder=0></iframe> 
 
-- **Precisioin:** 0.8741150264196992
-- **Accuracy:** 0.9009433962264151
+- **Precisioin:** 0.833396271640225
+- **Recall:** 0.8490566037735849
 
+
+
+<iframe src="accuracy_bar.html" width=800 height=600 frameBorder=0></iframe> 
+
+
+### Assessment of Model Predictions for 'Severe Weather' Instances
+
+Looking at the accuracy bar above, one can see that `Severe Weather` has a very high accuracy compared to the rest of the categories. We want to test if there is a bias towards `Severe Weather`
+
+**Null Hypothesis:** The null hypothesis assumes that there is no difference in the model's accuracy between 'severe weather' predictions and other prediction classes. In simpler terms, it implies that the observed accuracy for 'severe weather' predictions is purely due to chance and does not indicate any real difference.
+
+**Observed Accuracy for 'Severe Weather' Predictions: 97.16%**
+
+The observed accuracy of 97.16% signifies how accurately the model predicts instances categorized as 'severe weather.' This high accuracy suggests that the model performs exceptionally well when identifying and classifying 'severe weather' events.
+
+**Significance Test: p-value of 0.0000**
+
+The obtained p-value of 0.0000 from a statistical test suggests that the observed accuracy difference between 'severe weather' predictions and other predictions is statistically significant. This implies that the model's performance in predicting 'severe weather' differs significantly from its performance in predicting other types of events.
+
+
+<iframe src="permutation.html" width=800 height=600 frameBorder=0></iframe> 
+
+**Interpretation**
+
+The statistical significance of the observed accuracy difference indicates a potential bias or distinction in the model's behavior towards 'severe weather' predictions compared to other prediction classes. The reason for this biased behavior is because severe weather is the main cause of most outages, so the data is fit 
+
+It's important to consider these results with caution and delve deeper into understanding the model's behavior, potential biases, and real-world impacts to ensure fair and accurate predictions across all categories.
 
 
