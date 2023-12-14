@@ -1,5 +1,5 @@
 ___
-### Prediction Problem and Type:
+## Prediction Problem and Type:
 
 The prediction problem is **multiclass classification**. We are predicting the `CAUSE.CATEGORY` variable, which represents the categorized cause of an outage event. This variable aims to classify the cause category (e.g., equipment failure, human error, etc.) based on given features.
 
@@ -22,17 +22,16 @@ The chosen evaluation metric is **accuracy_score** for assessing model performan
 The objective here is to predict the cause category of outages based on the provided features using a multiclass classification approach, and the chosen metrics align with the nature of this predictive problem, considering the known features at the time of prediction and the significance of correctly identifying the cause categories for mitigation and resolution of outages.
 
 
-### Base Model:
+## Base Model:
 
 1. **Type of Model:** RandomForestClassifier - This model is an ensemble learning method that constructs multiple decision trees during training and outputs the mode of the classes (classification) or the mean prediction (regression) of the individual trees.
   
 2. **Features in the Model:**
 
    a. **Quantitative Features:**
-      - `N/A`
+      - `ANOMALY.LEVEL`
    
    b. **Ordinal Features:**
-      - `ANOMALY.LEVEL`
       - `MONTH`
    
    c. **Nominal Features:**
@@ -50,7 +49,7 @@ The objective here is to predict the cause category of outages based on the prov
 ### Performance Evaluation:
 
 - **Interpretation of Performance:**
-  - By using `y_test` and `prediction` obtained from `pl.predict(X_test)`, we were able to find an accuracy score of around 0.63.
+  - By using `y_test` and `prediction` obtained from `pl.predict(X_test)`, we were able to find an accuracy score of around 0.707.
   - The accuracy score for a simple model, where we predict the greatest amount of one of cateogry which is `severe weather`, we would get an accuracy score of around 53%.
   - Considering the accuracy score for a simple model, an accuracy score of 63% is a decent starting point and predicts better than a simple model
   
@@ -60,12 +59,7 @@ The objective here is to predict the cause category of outages based on the prov
   - Feature engineering: Extract more informative features or transform existing ones.
   
 
-Without the specific accuracy score or additional metrics, it's challenging to definitively categorize the model as "good." An "accurate" model highly depends on the problem's context, the data quality, feature selection, and domain understanding.
-
-Consideration of these aspects will provide a clearer perspective on the model's effectiveness and guide improvements to achieve a better-performing model.
-
-
-### Features Added and Their Relevance:
+## Final Model: Features Added and Their Relevance:
 
 1. **'MONTH' Feature:** 
    - **Rationale:** The 'MONTH' feature might capture seasonal variations or trends in outage occurrences. Certain months might have higher or lower outage frequencies due to weather patterns, maintenance schedules, or increased usage, providing valuable predictive patterns.
@@ -86,12 +80,16 @@ Consideration of these aspects will provide a clearer perspective on the model's
 ### Model Performance Improvement over Baseline:
 
 - **Baseline Model:** 
-  - Features: 'POSTAL.CODE', 'ANOMALY.LEVEL', 'OUTAGE.DURATION'
-  - Accuracy: Not specified
+  - Features: 'POSTAL.CODE', 'ANOMALY.LEVEL', 'OUTAGE.DURATION', 'OUTAGE.START.DATETIME'
+  - Accuracy: 70.7%
 
 - **Final Model:**
   - Added Features: 'MONTH', 'CUSTOMERS.AFFECTED'
   - Hyperparameter Tuning: `max_depth: 22`
+  - Feature Engineering : 
+    - One Hot Encoded the Postal Codes to transform them into usable features for the classifier
+    - Cyclically encoded the Month values of each power outage. 
+    - Extracted the Hour values from the 'OUTAGE.START.DATETIME' then we cyclically encoded the hour values of each power outage
   - Accuracy: 0.896 (89.6%)
 
 ### Improvement Explanation:
@@ -108,7 +106,6 @@ Consideration of these aspects will provide a clearer perspective on the model's
 
 - **Precisioin:** 0.833396271640225
 - **Recall:** 0.8490566037735849
-
 
 
 <iframe src="accuracy_bar.html" width=800 height=600 frameBorder=0></iframe> 
@@ -130,6 +127,7 @@ The obtained p-value of 0.0000 from a statistical test suggests that the observe
 
 
 <iframe src="permutation.html" width=800 height=600 frameBorder=0></iframe> 
+
 
 **Interpretation**
 
